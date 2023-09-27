@@ -1,9 +1,5 @@
 print("Jogo da Velha")
 
-#jogador1 = input("Digite o nome do Jogador 1: ")
-
-#jogador2 = input("Digite o nome do Jogador 2: ")
-
 tabuleuro = [" "]* 9
 
 
@@ -64,29 +60,64 @@ def verificaJogoO(tabuleuro):
         print("Jogador O Ganhou!!")
         return True
 
+def jogada(jogador, jogada):
+    for jogada in range(0,10):
+        if(jogador == 1):
+            if(tabuleiro[jogada - 1] == " "):
+                tabuleiro[jogada - 1] = "O"
+            else:
+                print("Invalido. Repita a Jogada.")
+                tabuleiro()
+
+        if(jogador == 2):
+            if(tabuleiro[jogada - 1] == " "):
+                tabuleiro[jogada - 1] = "X"
+        
+
+def jogo(jogador1,jogador2):
+    cont = 0
+    for i in range(0,10):
+        if(cont%2 == 0):
+            print("Vez do jogador "+ jogador1)
+            jogador = 1
+        else:
+            print("Vez do jogador "+ jogador2)
+            jogador = 2
+        jogada = int(input("digite a sua jogada:"))
+
+        if jogada in range(1,10):
+            if tabuleuro[jogada - 1] == " ":
+                if cont % 2:
+                    tabuleuro[jogada - 1] = "X"
+                else:
+                    tabuleuro[jogada - 1] = "O"
+            else:
+                print("invalido")
+                jogada = int(input("digite a sua jogada:"))
+                
+        tabuleiro()
+        fimDeJogo = verificaJogoX(tabuleuro)
+        if(fimDeJogo == True):
+            break
+        fimDeJogo = verificaJogoO(tabuleuro)
+        if(fimDeJogo == True):
+            break
+        cont = cont +1
 
 
-cont = 0
 tabuleiro()
 
+jogado1 = "Matheus" #input("Digite o nome do Jogador 1: ")
+jogado2 = "Lele" #input("Digite o nome do Jogador 2: ")
+print("")
+print("Ola Jogadores "+jogado1+" e "+jogado2+" bem vindos")
+print("Por padrão o jogador "+jogado1+" ficara com a peças O")
+print("E o jogador "+jogado2+"ficara com a peças X")
+print("")
 
-for i in range(0,10):
-    
-    jogada = int(input("digite a sua jogada:"))
+print("Para as jogados acontecem, cada jogador deve digitar o numero da casa que deseja marcar.")
+print(" 1 | 2 | 3 ")
+print(" 4 | 5 | 6 ")
+print(" 7 | 8 | 9 ")
 
-    if jogada in range(1,10):
-        if tabuleuro[jogada - 1] == " ":
-            if cont % 2:
-                tabuleuro[jogada - 1] = "X"
-            else:
-                tabuleuro[jogada - 1] = "O"
-        else:
-            print("invalido")
-    tabuleiro()
-    fimDeJogo = verificaJogoX(tabuleuro)
-    if(fimDeJogo == True):
-        break
-    fimDeJogo = verificaJogoO(tabuleuro)
-    if(fimDeJogo == True):
-        break
-    cont = cont +1
+jogo(jogado1,jogado2)
